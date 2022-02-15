@@ -23,7 +23,7 @@ public class WordleGrid {
         this.wordLength = 5;
         this.guessesLength = 6;
         // TODO add random 5 letter word through csv
-        this.answerWord = new Word("crane");
+        this.answerWord = new Word("stray");
         gameGrid = new Word[guessesLength];
         guessesChecked = new Word[guessesLength];
 
@@ -100,7 +100,7 @@ public class WordleGrid {
     }
 
     public Word colorWords(Word w) {
-        return w; 
+        return w.compareTo(answerWord); 
     }
 
     public boolean handleCheck(Word w){

@@ -8,6 +8,10 @@ public class Word {
     private int length;
     private ArrayList<Letter> letters = new ArrayList<Letter>(); 
 
+    private Color green = new Color(75, 176, 62); 
+    private Color yellow = new Color(235, 200, 47);
+    private Color gray = new Color(128, 128, 128);
+
     public Word(String guess){
         this.word = guess;
         this.length = guess.length();
@@ -38,7 +42,22 @@ public class Word {
         return letters.toString();
     }
 
-    public int compareTo(Word w){
-        return 0;
+    public Word compareTo(Word w){
+
+        for(int i = 0; i < length; i++){
+
+            for(int j = 0; j < length; j++){
+                if(this.letters.get(i).equals(w.letters.get(j))){
+                    (this.letters.get(i)).setColor(yellow);
+                }
+            }
+
+            // Check exact matches
+            if(this.letters.get(i).equals(w.letters.get(i))){
+                (this.letters.get(i)).setColor(green);
+            }
+
+        }
+        return this;
     }
 }

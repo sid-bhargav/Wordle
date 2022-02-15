@@ -25,8 +25,33 @@ public class Letter {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if(obj == null){
+			return false;
+		}
+		
+		try {
+			Letter l = (Letter) obj;
+			return this.letter.equals(l.letter);
+		}
+		catch (Exception e){
+		}
+
+		return false;
+    }
+
+    @Override
     public String toString() {
         String s = letter;
+        if(this.status.equals(green)){
+            s += "(G)";
+        }
+        if(this.status.equals(yellow)){
+            s += "(Y)";
+        }
+        if(this.status.equals(gray)){
+            s += "(*)";
+        }
         // s += status.toString();
         return s;
     }
