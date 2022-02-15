@@ -5,10 +5,12 @@ import java.awt.Color;
 
 public class Word {
     private String word;
+    private int length;
     private ArrayList<Letter> letters = new ArrayList<Letter>(); 
 
     public Word(String guess){
         this.word = guess;
+        this.length = guess.length();
         for (int i = 0; i < guess.length(); i++){
             letters.add(new Letter(guess.substring(i, i+1)));
         }
@@ -16,6 +18,10 @@ public class Word {
 
     public String getWord() {
         return word;
+    }
+
+    public int getLength() {
+        return length;
     }
 
     public ArrayList<Letter> getLetters() {

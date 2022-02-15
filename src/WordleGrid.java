@@ -14,7 +14,7 @@ public class WordleGrid {
   
     private Word answerWord;
     private Word[] gameGrid;
-    private Word[] guesses;
+    private Word[] guessesChecked;
 
     //TEMP
     private Word blank;
@@ -25,7 +25,7 @@ public class WordleGrid {
         // TODO add random 5 letter word through csv
         this.answerWord = new Word("crane");
         gameGrid = new Word[guessesLength];
-        guesses = new Word[guessesLength];
+        guessesChecked = new Word[guessesLength];
 
         //TEMP
         blank = new Word("#####");
@@ -36,7 +36,7 @@ public class WordleGrid {
         this.wordLength = wordLength;
         this.guessesLength = guessesLength;
         gameGrid = new Word[guessesLength];
-        guesses = new Word[guessesLength];
+        guessesChecked = new Word[guessesLength];
 
         //TEMP
         String s = "";
@@ -58,10 +58,10 @@ public class WordleGrid {
     public String toString() {
         String s = "";
         for(int i = 0; i < gameGrid.length; i++){
-            if(guesses[i] == null)
+            if(guessesChecked[i] == null)
                 gameGrid[i] = blank;
             else{
-                gameGrid[i] = guesses[i];
+                gameGrid[i] = guessesChecked[i];
             }
             s += gameGrid[i].toString() + "\n";
         }
@@ -69,8 +69,60 @@ public class WordleGrid {
     }
 
     // Maybe I should change this from a Letter array to a word?
-    public ArrayList<Letter> checkGuess(Word w){
-        ArrayList<Letter> checked = w.getLetters();
+
+    /* Checks */
+
+    //Checks if the length is right
+    public boolean checkLength(Word w) {
+        if(w.getLength() == wordLength)
+            return true; 
+        return false;
+    }
+
+    // Checks if the word is a valid english word 
+    public boolean checkValid(Word w) {
+        return true;
+    }
+
+    public boolean checkGameOver() {
+        int nulls = 0;
+        for(int i = 0; i < guessesChecked.length; i++){
+            if(guessesChecked[i] == null){
+                nulls++;
+            }
+        }
+
+        if(nulls > 0){
+            return false; 
+        }
+        System.out.println("Gameover");
+        return true; 
+    }
+
+    public Word colorWords(Word w) {
+        return w; 
+    }
+
+    public boolean handleCheck(Word w){
+
+        if(checkLength(w) && checkValid(w)){
+            colorWords(w);
+        } else {
+            System.out.println("Sorry, this word is invalid.");
+            return false;
+        }
+        return true; 
+    }
+
+    public Word addGuess(Word w) {
+        Word checked = w;
+
+        for(int i = 0; i < guessesChecked.length; i++){
+            if (guessesChecked[i] == null){
+                guessesChecked[i] = w;
+                break;
+            }
+        }
         return checked;
     }
 }

@@ -12,8 +12,13 @@ public class Main {
         while (!game.isWon(guess)){
         String guessWord = scanner.nextLine();  // Read user input
         guess = new Word(guessWord);
-        System.out.println(guess);
-        System.out.println(game.checkGuess(guess));
+    
+        if(game.handleCheck(guess)){
+            game.addGuess(guess);
+        }
+        System.out.println(game);
+        if(game.checkGameOver())
+            break;
         }
     }
 }
