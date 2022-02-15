@@ -7,6 +7,7 @@ public class Main {
         WordleGrid game = new WordleGrid();
         Scanner scanner = new Scanner(System.in);
         Word guess = null;
+        System.out.println(game);
     
         while (!game.isWon(guess)){
         String guessWord = scanner.nextLine();  // Read user input

@@ -7,9 +7,9 @@ public class Letter {
     private Color status;
     private String letter;
 
-    private Color green;
-    private Color yellow;
-    private Color gray;
+    private Color green = Color.GREEN; 
+    private Color yellow = Color.YELLOW;
+    private Color gray = Color.GRAY;
 
     public Letter(String s){
         this.letter = s; 
@@ -20,17 +20,13 @@ public class Letter {
         return letter;
     }
 
-    public void setGreen() {
-        this.status = green;
-    }
-
-    public void setYellow() {
-        this.status = yellow;
+    public void setColor(Color c) {
+        this.status = c;
     }
 
     @Override
     public String toString() {
-        return letter;
+        return letter + status.toString();
     }
 
 }

@@ -1,6 +1,7 @@
 package src;
 
 import java.util.ArrayList;
+import java.awt.Color;
 
 public class Word {
     private String word;
@@ -18,6 +19,11 @@ public class Word {
     }
 
     public ArrayList<Letter> getLetters() {
+        return letters;
+    }
+
+    public ArrayList<Letter> setLetterColor(int i, Color c) {
+        letters.get(i).setColor(c);
         return letters;
     }
 
