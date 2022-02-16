@@ -16,6 +16,8 @@ public class WordleGrid {
     private Word[] gameGrid;
     private Word[] guessesChecked;
 
+    private ArrayList<Letter> bank = new ArrayList<>()
+
     //TEMP
     private Word blank;
 
@@ -23,7 +25,7 @@ public class WordleGrid {
         this.wordLength = 5;
         this.guessesLength = 6;
         // TODO add random 5 letter word through csv
-        this.answerWord = new Word("stray");
+        this.answerWord = new Word("faked");
         gameGrid = new Word[guessesLength];
         guessesChecked = new Word[guessesLength];
 
