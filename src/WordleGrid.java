@@ -1,5 +1,9 @@
 package src;
 
+import com.opencsv.CSVReader;
+import com.opencsv.*;
+
+import java.io.FileReader;
 import java.util.ArrayList;
 
 public class WordleGrid {
@@ -16,16 +20,44 @@ public class WordleGrid {
     private Word[] gameGrid;
     private Word[] guessesChecked;
 
-    private ArrayList<Letter> bank = new ArrayList<>()
+    private ArrayList<String> legalWords = new ArrayList<>();
 
-    //TEMP
+    private ArrayList<Letter> bank = new ArrayList<>();
+
+    // Read CSV file and find a random word to use:
+
+    //TEMP creates a row for the terminal
     private Word blank;
+
+    public String generateWord(){
+        
+        try {
+            //csv file containing data
+            String strFile = "FiveLetterWords.csv";
+            CSVReader reader = new CSVReader(new FileReader(strFile));
+            String[] nextLine;
+            int lineNumber = 0;
+            while ((nextLine = reader.readNext()) != null) {
+                lineNumber++;
+                // System.out.println("Line # " + lineNumber);
+                legalWords.add(nextLine[0]);
+            
+                // // nextLine[] is an array of values from the line
+                // System.out.println(nextLine[0] + " etc...");
+            }
+        } catch (Exception e) {
+            System.out.println("Error loading in word list file");
+        }
+        int n = 0;
+        System.out.println(legalWords.get(n));
+        return legalWords.get(n);
+    }
 
     public WordleGrid(){
         this.wordLength = 5;
         this.guessesLength = 6;
         // TODO add random 5 letter word through csv
-        this.answerWord = new Word("faked");
+        this.answerWord = new Word(this.generateWord());
         gameGrid = new Word[guessesLength];
         guessesChecked = new Word[guessesLength];
 

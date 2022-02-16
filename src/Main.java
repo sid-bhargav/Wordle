@@ -1,9 +1,15 @@
 package src;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.opencsv.CSVReader;
+
+import java.io.FileReader;
 
 public class Main {
     public static void main(String[] args){
+
         WordleGrid game = new WordleGrid();
         Scanner scanner = new Scanner(System.in);
         Word guess = null;
