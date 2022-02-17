@@ -4,7 +4,9 @@ This is a Wordle clone made by me for an infinite number of games (really just 5
 
 The game is played in the terminal and follows all the rules Wordle does. Some of the words are unfortunately a little bit obscure, but I plan to change the list I'm using soon. 
 
-The words are currently from a [list provided by Stanford](https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt)
+The possible words that are answers are currently from a [list provided by Stanford](https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt) (Last retrieved Feb 17 2022)
+
+The possible words you can guess are currently from a [list provided by Github user tabatkins](https://github.com/tabatkins/wordle-list/blob/main/words) (Last retrieved Feb 17 2022)
 
 ## Game play
 
