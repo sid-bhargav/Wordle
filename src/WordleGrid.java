@@ -19,7 +19,8 @@ public class WordleGrid {
     private Word[] gameGrid;
     private Word[] guessesChecked;
 
-    private ArrayList<String> legalWords = new ArrayList<>();
+    private ArrayList<String> answerWords = new ArrayList<>();
+    private ArrayList<String> guessWords = new ArrayList<>();
 
     private ArrayList<Letter> bank = new ArrayList<>();
 
@@ -31,27 +32,36 @@ public class WordleGrid {
     public void loadWords(){
         try {
             //csv file containing data
-            String strFile = "FiveLetterWords.csv";
+            String strFile = "AnswerWords.csv";
             CSVReader reader = new CSVReader(new FileReader(strFile));
             String[] nextLine;
             int lineNumber = 0;
             while ((nextLine = reader.readNext()) != null) {
                 lineNumber++;
-                // System.out.println("Line # " + lineNumber);
-                legalWords.add(nextLine[0]);
-            
-                // // nextLine[] is an array of values from the line
-                // System.out.println(nextLine[0] + " etc...");
+                answerWords.add(nextLine[0]);
             }
         } catch (Exception e) {
-            System.out.println("Error loading in word list file");
+            System.out.println("Error loading in answer words list file");
+        }
+        try {
+            //csv file containing data
+            String strFile = "GuessWords.csv";
+            CSVReader reader = new CSVReader(new FileReader(strFile));
+            String[] nextLine;
+            int lineNumber = 0;
+            while ((nextLine = reader.readNext()) != null) {
+                lineNumber++;
+                guessWords.add(nextLine[0]);
+            }
+        } catch (Exception e) {
+            System.out.println("Error loading in valid guess words list file");
         }
     }
 
     public String pickWord(){
-        int n = (int)(legalWords.size()*java.lang.Math.random());
-        System.out.println(legalWords.get(n));
-        return legalWords.get(n);
+        int n = (int)(answerWords.size()*java.lang.Math.random());
+        System.out.println(answerWords.get(n));
+        return answerWords.get(n);
     }
 
     public WordleGrid(){
@@ -121,8 +131,8 @@ public class WordleGrid {
 
     // Checks if the word is a valid english word 
     public boolean checkValid(Word w) {
-        for (int i = 0; i < legalWords.size(); i++){
-            if (w.equals(new Word(legalWords.get(i)))){
+        for (int i = 0; i < guessWords.size(); i++){
+            if (w.equals(new Word(guessWords.get(i)))){
                 return true;
             }
         }
