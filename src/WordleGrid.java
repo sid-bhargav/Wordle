@@ -49,7 +49,7 @@ public class WordleGrid {
             System.out.println("Error loading in word list file");
         }
         int n = (int)(legalWords.size()*java.lang.Math.random());
-        System.out.println(legalWords.get(n));
+        // System.out.println(legalWords.get(n));
         return legalWords.get(n);
     }
 
