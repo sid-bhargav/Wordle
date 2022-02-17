@@ -136,7 +136,10 @@ public class WordleGrid {
                 System.out.println("You're cracked! it took you just one turn to get the answer: " + answerWord.getWord());
                 return false;
             }
-            
+            if (turns == 2){
+                System.out.println("That's insane! it took you just two turns to get the answer: " + answerWord.getWord());
+                return false;
+            }
             if (turns < 5){
                 System.out.println("You won! it took you " + turns + " turns to get the answer: " + answerWord.getWord());
                 return false;
