@@ -42,6 +42,22 @@ public class Word {
         return letters.toString();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null){
+			return false;
+		}
+		
+		try {
+			Word w = (Word) obj;
+            return this.word.equals(w.word);
+		}
+		catch (Exception e){
+		}
+
+		return false;
+    }
+
     public Word compareTo(Word w){
 
         for(int i = 0; i < length; i++){

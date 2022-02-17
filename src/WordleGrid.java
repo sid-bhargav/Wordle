@@ -29,8 +29,7 @@ public class WordleGrid {
     //TEMP creates a row for the terminal
     private Word blank;
 
-    public String generateWord(){
-        
+    public void loadWords(){
         try {
             //csv file containing data
             String strFile = "FiveLetterWords.csv";
@@ -48,16 +47,20 @@ public class WordleGrid {
         } catch (Exception e) {
             System.out.println("Error loading in word list file");
         }
+    }
+
+    public String pickWord(){
         int n = (int)(legalWords.size()*java.lang.Math.random());
         // System.out.println(legalWords.get(n));
         return legalWords.get(n);
     }
 
     public WordleGrid(){
+        this.loadWords();
         this.wordLength = 5;
         this.guessesLength = 6;
         // TODO add random 5 letter word through csv
-        this.answerWord = new Word(this.generateWord());
+        this.answerWord = new Word(this.pickWord());
         gameGrid = new Word[guessesLength];
         guessesChecked = new Word[guessesLength];
 
@@ -115,7 +118,12 @@ public class WordleGrid {
 
     // Checks if the word is a valid english word 
     public boolean checkValid(Word w) {
-        return true;
+        for (int i = 0; i < legalWords.size(); i++){
+            if (w.equals(new Word(legalWords.get(i)))){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean checkGameOver() {
