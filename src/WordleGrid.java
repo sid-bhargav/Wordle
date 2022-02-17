@@ -132,8 +132,18 @@ public class WordleGrid {
     public boolean checkGameOver() {
         // Checks if game has been won yet
         if (gameWon){
-            System.out.println("You won! it took you " + turns + " turns to get the answer: " + answerWord.getWord());
-            return false;
+            if (turns == 1){
+                System.out.println("You're cracked! it took you just one turn to get the answer: " + answerWord.getWord());
+                return false;
+            }
+            
+            if (turns < 5){
+                System.out.println("You won! it took you " + turns + " turns to get the answer: " + answerWord.getWord());
+                return false;
+            } else {
+                System.out.println("Wow, that was hard! it took you " + turns + " turns to get the answer: " + answerWord.getWord());
+                return false;
+            }
         }
 
         // Checks to see if there are any guesses left, if all guesses have been used: game over
