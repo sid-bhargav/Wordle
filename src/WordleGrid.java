@@ -12,8 +12,7 @@ public class WordleGrid {
     private int guessesLength;
 
     // Game logic
-    private int turns = 0;
-    private int[] played;
+    int turns = 0;
     private boolean gameWon = false;
   
     private Word answerWord;
@@ -51,7 +50,7 @@ public class WordleGrid {
 
     public String pickWord(){
         int n = (int)(legalWords.size()*java.lang.Math.random());
-        // System.out.println(legalWords.get(n));
+        System.out.println(legalWords.get(n));
         return legalWords.get(n);
     }
 
@@ -87,10 +86,6 @@ public class WordleGrid {
         return wordLength;
     }
 
-    public boolean isWon(Word w){
-        return false; 
-    }
-
     @Override
     public String toString() {
         String s = "";
@@ -108,6 +103,14 @@ public class WordleGrid {
     // Maybe I should change this from a Letter array to a word?
 
     /* Checks */
+
+    public boolean isWon(Word w){
+        if (w.equals(answerWord)){
+            gameWon = true;
+            return true;
+        }
+        return false;
+    }
 
     //Checks if the length is right
     public boolean checkLength(Word w) {
@@ -127,17 +130,23 @@ public class WordleGrid {
     }
 
     public boolean checkGameOver() {
+        // Checks if game has been won yet
+        if (gameWon){
+            System.out.println("You won! it took you " + turns + " turns to get the answer: " + answerWord.getWord());
+            return false;
+        }
+
+        // Checks to see if there are any guesses left, if all guesses have been used: game over
         int nulls = 0;
         for(int i = 0; i < guessesChecked.length; i++){
             if(guessesChecked[i] == null){
                 nulls++;
             }
         }
-
         if(nulls > 0){
-            return false; 
+            return false;
         }
-        System.out.println("Gameover");
+        System.out.println("Gameover, the word was: " + answerWord.getWord());
         return true; 
     }
 
@@ -162,6 +171,7 @@ public class WordleGrid {
         for(int i = 0; i < guessesChecked.length; i++){
             if (guessesChecked[i] == null){
                 guessesChecked[i] = w;
+                turns++;
                 break;
             }
         }

@@ -14,8 +14,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Word guess = null;
         System.out.println(game);
-    
-        while (!game.isWon(guess)){
+        boolean gameOver = false; 
+
+        while (!gameOver){
         String guessWord = scanner.nextLine();  // Read user input
         guess = new Word(guessWord);
     
@@ -23,6 +24,7 @@ public class Main {
             game.addGuess(guess);
         }
         System.out.println(game);
+        gameOver = game.isWon(guess);
         if(game.checkGameOver())
             break;
         }
