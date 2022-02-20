@@ -136,6 +136,13 @@ public class WordleGrid {
                 return true;
             }
         }
+        /* This might be redundant, but I'm worried that maybe AnswerWords doesn't contain all the words GuessWords does, 
+        I might write some code later that checks */
+        for (int i = 0; i < answerWords.size(); i++){
+            if (w.equals(new Word(answerWords.get(i)))){
+                return true;
+            }
+        }
         return false;
     }
 
