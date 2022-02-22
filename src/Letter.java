@@ -10,6 +10,7 @@ public class Letter {
     private Color green = new Color(75, 176, 62); 
     private Color yellow = new Color(235, 200, 47);
     private Color gray = new Color(128, 128, 128);
+    private Color white = new Color(0, 0, 0);
 
     public Letter(String s){
         this.letter = s; 
@@ -18,6 +19,10 @@ public class Letter {
 
     public String getLetter() {
         return letter;
+    }
+
+    public Color getStatus() {
+        return status;
     }
 
     public void setColor(Color c) {
@@ -52,6 +57,8 @@ public class Letter {
         if(this.status.equals(gray)){
             s += "(*)";
         }
+        if(this.status.equals(white))
+            s += "";
         // s += status.toString();
         return s;
     }

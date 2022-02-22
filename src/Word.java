@@ -11,6 +11,7 @@ public class Word {
     private Color green = new Color(75, 176, 62); 
     private Color yellow = new Color(235, 200, 47);
     private Color gray = new Color(128, 128, 128);
+    private Color white = new Color(0, 0, 0);
 
     public Word(String guess){
         this.word = guess;

@@ -1,10 +1,10 @@
 package src;
 
 import com.opencsv.CSVReader;
-import com.opencsv.*;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.awt.Color;
 
 public class WordleGrid {
     // Game parameters
@@ -19,10 +19,15 @@ public class WordleGrid {
     private Word[] gameGrid;
     private Word[] guessesChecked;
 
+    private Color green = new Color(75, 176, 62); 
+    private Color yellow = new Color(235, 200, 47);
+    private Color gray = new Color(128, 128, 128);
+    private Color white = new Color(0, 0, 0);
+
     private ArrayList<String> answerWords = new ArrayList<>();
     private ArrayList<String> guessWords = new ArrayList<>();
 
-    private ArrayList<Letter> bank = new ArrayList<>();
+    private ArrayList<Letter> wordBank;
 
     // Read CSV file and find a random word to use:
 
@@ -59,8 +64,25 @@ public class WordleGrid {
     }
 
     public String pickWord(){
+        // Pick a new word for you to need to guess
         int n = (int)(answerWords.size()*java.lang.Math.random());
         System.out.println(answerWords.get(n));
+
+        // Reset the word bank
+        if (wordBank == null){
+            String alphabet = "abcdefghijklmnopqrstuvwxyz";
+            wordBank = new ArrayList<Letter>();
+            for (int i = 0; i < alphabet.length(); i++){
+                wordBank.add(new Letter(alphabet.substring(i, i+1)));
+                wordBank.get(i).setColor(white);
+            }
+        } else {
+            for (int i = 0; i < wordBank.size(); i++){
+                wordBank.get(i).setColor(gray);
+            }
+        }
+
+        
         return answerWords.get(n);
     }
 
@@ -99,6 +121,7 @@ public class WordleGrid {
     @Override
     public String toString() {
         String s = "";
+
         for(int i = 0; i < gameGrid.length; i++){
             if(guessesChecked[i] == null)
                 gameGrid[i] = blank;
@@ -107,6 +130,8 @@ public class WordleGrid {
             }
             s += gameGrid[i].toString() + "\n";
         }
+        s += wordBank + "\n";
+
         return s; 
     }
 
@@ -174,7 +199,20 @@ public class WordleGrid {
     }
 
     public Word colorWords(Word w) {
-        return w.compareTo(answerWord); 
+        Word colored = w.compareTo(answerWord);
+
+        for (int i = 0; i < wordBank.size(); i++){
+            for (int j = 0; j < colored.getLength(); j++){
+                if (colored.getLetters().get(j).equals(wordBank.get(i))){
+                    // Check if the color hasn't already been set as green
+                    if (!wordBank.get(i).getStatus().equals(green)){
+                        wordBank.get(i).setColor(colored.getLetters().get(j).getStatus());
+                    }
+                }
+            }
+        }
+
+        return colored;
     }
 
     public boolean handleCheck(Word w){
